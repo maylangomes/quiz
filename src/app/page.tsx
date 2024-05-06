@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { supabase } from '../../utils/supabase';
 import Select from 'react-select';
-
+import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
 
 const Quiz = () => {
   const { register, handleSubmit, control, formState: { errors } } = useForm();
@@ -113,6 +113,25 @@ const Quiz = () => {
           {errors?.question6bis && <p>errors.question5.message</p>}
         </div>
       )}
+      <div>
+        <h2>Question 7 : Quelle affirmation est vraie ?</h2>
+        <p>Relativement* vraie.</p>
+        <Dropdown>
+          <DropdownTrigger>
+            <Button 
+              variant="bordered" 
+            >
+              Make your choice
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Static Actions">
+            <DropdownItem key="Jordan">Michael Jordan a arrêté sa saison NBA pour aller jouer au golf</DropdownItem>
+            <DropdownItem key="Westbrook">Westbrook a mis plus de briques à 45° que de 3 points dans sa carrière</DropdownItem>
+            <DropdownItem key="Shaq">Shaquille O'Neal subissait volontairement des fautes tellement il tirait mal les lancers-francs.</DropdownItem>
+            <DropdownItem key="Kobe">Kobe Bryant a fait une passe en 1989</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </div>
       <div>
         <button type='submit'>Envoyer les réponses !</button>
       </div>
