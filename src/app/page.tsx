@@ -5,6 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { supabase } from '../../utils/supabase';
 import Select from 'react-select';
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
+import { Input } from "@/components/ui/input"
 
 const Quiz = () => {
   const { register, handleSubmit, control, formState: { errors } } = useForm();
@@ -40,7 +41,7 @@ const Quiz = () => {
       <div>
         <h2>Question 1 : Nom du plus grand joueur de basket de l'histoire</h2>
         <p>Aucun jugement, tu peux citer n'importe quel joueur.</p>
-        <input type="text" {...register('question1', { required: "Answer to the question 1 please" })} />
+        <Input type="text" {...register('question1', { required: "Answer to the question 1 please" })} />
         {errors?.question1 && <p>errors.question1.message</p>}
       </div>
 
