@@ -49,7 +49,8 @@ const Quiz = () => {
   };
 
   const handleQuestionAChange = (e: any) => {
-    setShowQuestion6(e.target.value === 'Oui');
+    const EventQuestion = e.target.value;
+    setShowQuestion6(EventQuestion === 'Oui');
   };
 
   return (
