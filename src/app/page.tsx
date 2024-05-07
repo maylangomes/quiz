@@ -20,11 +20,10 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button as ButtonDialogue } from "@/components/ui/button";
-import InputPrenom from './Prenom/page';
 
 
 const Quiz = () => {
-  const { register, handleSubmit, control, formState: { errors } } = useForm();
+  const { register, handleSubmit, control } = useForm();
   const [isSubmit, setIsSubmit] = useState(false);
   const [inputValid, setInputValid] = useState(false);
   const [showQuestion6, setShowQuestion6] = useState(false);
@@ -57,7 +56,10 @@ const Quiz = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl mx-auto mt-8 bg-gray-800 text-gray-200 p-6 rounded-lg">
-      <InputPrenom register={register} />
+      <div>
+        <h2 className="text-xl font-semibold text-cyan-300">Prénom</h2>
+        <Input type="text" {...register('prenom', { required: "prenom empty" })} className="mt-1 w-full" />
+      </div>
       <div className="mt-8">
         <h2 className="text-lg font-semibold">Question 1 : Nom du plus grand joueur de basket de l'histoire</h2>
         <p className='text-sm'>Aucun jugement, tu peux citer n'importe lequel (même Westbrook).</p>
