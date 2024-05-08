@@ -52,20 +52,14 @@ const Quiz = () => {
   const { register, handleSubmit, control, formState: { errors } } = useForm();
   console.log(errors);
   const [isSubmit, setIsSubmit] = useState(false);
-  const [inputValid, setInputValid] = useState(false);
   const [showQuestion6, setShowQuestion6] = useState(false);
-  const [position, setPosition] = React.useState("bottom");
   const [sliderValue, setSliderValue] = useState<number | number[] | string >(40);
-
-  useEffect(() => {
-    console.log(inputValid);
-  },  [inputValid]);
 
   const onSubmit = async (data: any) => {
     setIsSubmit(true);
     try {
       const answers = {
-        prenom: data.prenom,
+        nom: data.nom,
         question1: data.question1,
         question2: data.question2,
         question3: data.Question3,
@@ -94,7 +88,7 @@ const Quiz = () => {
       <div>
         <h2 className="text-xl font-bold text-primary">NOM PRENOM *</h2>
         <p className='text-sm'>* sans quoi vos réponses ne seront pas prise en compte.</p>
-        <Input type="text" {...register("prenom", { required: true, maxLength: 60 })} className="mt-1 w-full" />
+        <Input type="text" {...register("nom", { required: true, maxLength: 60 })} className="mt-1 w-full" />
         {errors.prenom && errors.prenom.message?.toString()}
       </div>
       <div className="mt-8">
@@ -120,10 +114,12 @@ const Quiz = () => {
           </div>
           <div className="flex items-center space-x-2">
             <input type="radio" id="3m05" value="3m05" {...register("Question3")} className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
+            {errors.question3 && errors.question3.message?.toString()}
             <label htmlFor="3m05" className="ml-2 text-lg">3,05 mètres</label>
           </div>
           <div className="flex items-center space-x-2">
             <input type="radio" id="3m10" value="3m10" {...register("Question3")} className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
+            {errors.question3 && errors.question3.message?.toString()}
             <label htmlFor="3m10" className="ml-2 text-lg">3,10 mètres</label>
           </div>
         </div>
@@ -180,15 +176,15 @@ const Quiz = () => {
       <div className="mt-8">
         <h2 className="text-lg font-semibold">Question 5 : Quel est le meilleur sport pour toi ?</h2>
         <p className='text-sm'>Possibilité d'argumenter si c'est le basket.</p>
-        <Textarea {...register("question5")} className="mt-1 w-full bg-gray-800 text-white px-3 py-2 rounded-lg" />
+        <Textarea {...register("question5")} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg" />
         {errors.question5 && errors.question5.message?.toString()}
       </div>
       <div className="mt-8">
         <h2 className="text-lg font-semibold">Question 6 : As-tu déjà fait du basket ?</h2>
         <p className='text-sm'>Le questionnaire étant à but statistique, la question paraît pertinente.</p>
-        <select {...register("question6")} onChange={handleQuestionAChange} className="mt-1 w-full bg-gray-800 text-white px-3 py-2 rounded-lg">
+        <select {...register("question6")} onChange={handleQuestionAChange} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg">
         {errors.question6 && errors.question6.message?.toString()}
-          <option value="">Choisir ici</option>
+          <option value="">-- Choix --</option>
           <option value="Oui">Oui</option>
           <option value="Non">Non</option>
         </select>
@@ -197,13 +193,13 @@ const Quiz = () => {
         <div className="mt-8">
           <h2 className="text-lg font-semibold">Question 6 bis : Combien de temps ?</h2>
           <p className='text-sm'>Toujours pour les stats.</p>
-          <Input type="text" {...register("question6bis")} className="mt-1 w-full bg-gray-800 text-white px-3 py-2 rounded-lg" />
+          <Input type="text" {...register("question6bis")} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg" />
           {errors.question6bis && errors.question6bis.message?.toString()}
         </div>
       )}
       <div className="mt-8">
         <h2 className="text-lg font-semibold">Question 7 : Quelle affirmation est fausse* ?</h2>
-        <p className='text-sm'>* Tout est relatif.</p>
+        <p className='text-sm mb-2'>* Tout est relatif.</p>
         <Controller
           control={control}
           name="question7"
@@ -211,9 +207,9 @@ const Quiz = () => {
           render={({ field }) => (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <ButtonDialogue variant="outline" className="bg-gray-800 text-white px-3 py-2 rounded-lg">Open</ButtonDialogue>
+                <ButtonDialogue variant="outline" className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg">Open</ButtonDialogue>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
+              <DropdownMenuContent className="w-96">
                 <DropdownMenuRadioGroup value={field.value} onValueChange={field.onChange}>
                   <DropdownMenuRadioItem value="Michael">Michael Jordan a quitté la NBA pour aller jouer au golf</DropdownMenuRadioItem>
                   <DropdownMenuRadioItem value="Westbrook">Westbrook a mis plus de briques à 45° que de 3 points dans sa carrière</DropdownMenuRadioItem>
@@ -247,12 +243,12 @@ const Quiz = () => {
           />
         </Dropdown> */}
       </div>
-      <div>
+      <div className="mt-8">
         <h2 className="text-lg font-semibold">Question 8 : Selon toi, quel pourcentage de chance a l'équipe de France d'être championne du monde en 2027 ?</h2>
-        <p className='text-sm'>Avis perso : 92%.</p>
-        <Slider 
+        <p className='text-sm mb-2'>Avis perso : 92%.</p>
+        <Slider
           name="question8"
-          label="Choisis ton pourcentage"
+          label="Sélectionne ton pourcentage ci-dessous"
           step={1} 
           maxValue={100} 
           minValue={0} 
