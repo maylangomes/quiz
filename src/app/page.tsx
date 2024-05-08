@@ -4,7 +4,16 @@ import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { supabase } from '../../utils/supabase';
 import Select from 'react-select';
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
+//import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 // import { Label } from "@/components/ui/label";
 // import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -21,12 +30,29 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button as ButtonDialogue } from "@/components/ui/button";
 
+function TextFieldError({ error }: { error?: string }) {
+  return error ? (
+    <div
+      style={{
+        color: "red",
+        position: "absolute",
+        top: "-16px",
+        fontSize: "0.8em"
+      }}
+    >
+      {error}
+    </div>
+  ) : null;
+}
+
 
 const Quiz = () => {
-  const { register, handleSubmit, control } = useForm();
+  const { register, handleSubmit, control, formState: { errors } } = useForm();
+  console.log(errors);
   const [isSubmit, setIsSubmit] = useState(false);
   const [inputValid, setInputValid] = useState(false);
   const [showQuestion6, setShowQuestion6] = useState(false);
+  const [position, setPosition] = React.useState("bottom")
 
   useEffect(() => {
     console.log(inputValid);
@@ -35,12 +61,18 @@ const Quiz = () => {
   const onSubmit = async (data: any) => {
     setIsSubmit(true);
     try {
-      const tabAnswers = [];
-      for (const key in data) {
-        const answer = data[key];
-        tabAnswers.push(answer);
-      }
-      await supabase.from('answers').insert([{ values: tabAnswers }]).select();
+      const answers = {
+        prenom: data.prenom,
+        question1: data.question1,
+        question2: data.question2,
+        question3: data.Question3,
+        question4: data.question4,
+        question5: data.question5,
+        question6: data.question6,
+        question6bis: data.question6bis,
+        question7: data.question7
+      };
+      await supabase.from('answer').insert(answers).select();
       console.log('Form submitted successfully!');
     } catch (error: any) {
       console.error('Failed to submit form:', error.message);
@@ -57,17 +89,20 @@ const Quiz = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl mx-auto mt-8 bg-gray-800 text-gray-200 p-6 rounded-lg">
       <div>
         <h2 className="text-xl font-semibold text-cyan-300">Prénom</h2>
-        <Input type="text" {...register('prenom', { required: "prenom empty" })} className="mt-1 w-full" />
+        <Input type="text" {...register("prenom", { required: true, maxLength: 60 })} className="mt-1 w-full" />
+        {errors.prenom && errors.prenom.message?.toString()}
       </div>
       <div className="mt-8">
         <h2 className="text-lg font-semibold">Question 1 : Nom du plus grand joueur de basket de l'histoire</h2>
         <p className='text-sm'>Aucun jugement, tu peux citer n'importe lequel (même Westbrook).</p>
-        <Input type="text" {...register('question1')} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg" />
+        <Input type="text" {...register("question1")} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg" />
+        {errors.question1 && errors.question1.message?.toString()}
       </div>
       <div className="mt-8">
         <h2 className="text-lg font-semibold">Question 2 : Quelle est le nombre de secondes accordé pour franchir le milieu de terrain ?</h2>
         <p className='text-sm'>C'est bien d'être tranquille dans la vie, sauf quand t'attaques au basket.</p>
-        <Input type="number" {...register('question2')} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg" />
+        <Input type="number" {...register("question2")} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg" />
+        {errors.question2 && errors.question2.message?.toString()}
       </div>
       <div className="mt-8">
         <h2 className="text-lg font-semibold">Question 3 : Quelle est la hauteur du panier ?</h2>
@@ -75,6 +110,7 @@ const Quiz = () => {
         <div className="mt-3">
           <div className="flex items-center space-x-2">
             <input type="radio" id="3m" value="3m" {...register("Question3")} className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
+            {errors.question3 && errors.question3.message?.toString()}
             <label htmlFor="3m" className="ml-2 text-lg">3 mètres</label>
           </div>
           <div className="flex items-center space-x-2">
@@ -139,12 +175,14 @@ const Quiz = () => {
       <div className="mt-8">
         <h2 className="text-lg font-semibold">Question 5 : Quel est le meilleur sport pour toi ?</h2>
         <p className='text-sm'>Possibilité d'argumenter si c'est le basket.</p>
-        <Textarea {...register('question5')} className="mt-1 w-full bg-gray-800 text-white px-3 py-2 rounded-lg" />
+        <Textarea {...register("question5")} className="mt-1 w-full bg-gray-800 text-white px-3 py-2 rounded-lg" />
+        {errors.question5 && errors.question5.message?.toString()}
       </div>
       <div className="mt-8">
         <h2 className="text-lg font-semibold">Question 6 : As-tu déjà fait du basket ?</h2>
         <p className='text-sm'>Le questionnaire étant à but statistique, la question paraît pertinente.</p>
-        <select {...register('question6')} onChange={handleQuestionAChange} className="mt-1 w-full bg-gray-800 text-white px-3 py-2 rounded-lg">
+        <select {...register("question6")} onChange={handleQuestionAChange} className="mt-1 w-full bg-gray-800 text-white px-3 py-2 rounded-lg">
+        {errors.question6 && errors.question6.message?.toString()}
           <option value="">Choisir ici</option>
           <option value="Oui">Oui</option>
           <option value="Non">Non</option>
@@ -154,13 +192,34 @@ const Quiz = () => {
         <div className="mt-8">
           <h2 className="text-lg font-semibold">Question 6 bis : Combien de temps ?</h2>
           <p className='text-sm'>Toujours pour les stats.</p>
-          <Input type="text" {...register('question6bis')} className="mt-1 w-full bg-gray-800 text-white px-3 py-2 rounded-lg" />
+          <Input type="text" {...register("question6bis")} className="mt-1 w-full bg-gray-800 text-white px-3 py-2 rounded-lg" />
+          {errors.question6bis && errors.question6bis.message?.toString()}
         </div>
       )}
       <div className="mt-8">
         <h2 className="text-lg font-semibold">Question 7 : Quelle affirmation est fausse* ?</h2>
         <p className='text-sm'>* Tout est relatif.</p>
-        <Dropdown>
+        <Controller
+          control={control}
+          name="question7"
+          defaultValue=""
+          render={({ field }) => (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <ButtonDialogue variant="outline" className="bg-gray-800 text-white px-3 py-2 rounded-lg">Open</ButtonDialogue>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuRadioGroup value={field.value} onValueChange={field.onChange}>
+                  <DropdownMenuRadioItem value="Michael">Michael Jordan a quitté la NBA pour aller jouer au golf</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="Westbrook">Westbrook a mis plus de briques à 45° que de 3 points dans sa carrière</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="Shaq">Shaquille O'Neal subissait volontairement des fautes car il marquait autant de lancers-francs qu'un poussin</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="Kobe">Kobe Bryant a fait une passe en 1989</DropdownMenuRadioItem>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+        />
+        {/* <Dropdown>
           <DropdownTrigger>
             <Button 
               variant="bordered" 
@@ -169,13 +228,19 @@ const Quiz = () => {
               Make your choice
             </Button>
           </DropdownTrigger>
-          <DropdownMenu aria-label="Static Actions">
-            <DropdownItem key="Jordan">Michael Jordan a quitté la NBA pour aller jouer au golf</DropdownItem>
-            <DropdownItem key="Westbrook">Westbrook a mis plus de briques à 45° que de 3 points dans sa carrière</DropdownItem>
-            <DropdownItem key="Shaq">Shaquille O'Neal subissait volontairement des fautes car il marquait autant de lancers-francs qu'un poussin.</DropdownItem>
-            <DropdownItem key="Kobe">Kobe Bryant a fait une passe en 1989</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+          <Controller
+            control={control}
+            name="question7"
+            render={({ field }) => (
+              <DropdownMenu {...field} aria-label="Static Actions">
+                <DropdownItem key="Jordan">Michael Jordan a quitté la NBA pour aller jouer au golf</DropdownItem>
+                <DropdownItem key="Westbrook">Westbrook a mis plus de briques à 45° que de 3 points dans sa carrière</DropdownItem>
+                <DropdownItem key="Shaq">Shaquille O'Neal subissait volontairement des fautes car il marquait autant de lancers-francs qu'un poussin.</DropdownItem>
+                <DropdownItem key="Kobe">Kobe Bryant a fait une passe en 1989</DropdownItem>
+              </DropdownMenu>
+            )}
+          />
+        </Dropdown> */}
       </div>
       <div className="flex justify-end mt-8">
         <AlertDialog>
