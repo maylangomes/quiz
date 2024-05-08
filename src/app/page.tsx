@@ -92,7 +92,8 @@ const Quiz = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl mx-auto mt-8 bg-gray-800 text-gray-200 p-6 rounded-lg">
       <div>
-        <h2 className="text-xl font-semibold text-cyan-300">Prénom</h2>
+        <h2 className="text-xl font-bold text-primary">NOM PRENOM *</h2>
+        <p className='text-sm'>* sans quoi vos réponses ne seront pas prise en compte.</p>
         <Input type="text" {...register("prenom", { required: true, maxLength: 60 })} className="mt-1 w-full" />
         {errors.prenom && errors.prenom.message?.toString()}
       </div>
@@ -268,7 +269,7 @@ const Quiz = () => {
             <AlertDialogHeader>
               <AlertDialogTitle>Merci !</AlertDialogTitle>
               <AlertDialogDescription>
-                Tes réponses ont bien été envoyées. Tu peux répondre au questionnaire autant que tu le souhaites, seul ton dernier envoi sera pris en compte.
+                Tes réponses ont bien été envoyées avec le nom indiqué. Tu peux répondre au questionnaire autant que tu le souhaites, seul ton dernier envoi sera pris en compte.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
