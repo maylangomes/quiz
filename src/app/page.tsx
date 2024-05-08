@@ -31,6 +31,7 @@ import {
 import { Button as ButtonDialogue } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {Slider} from "@nextui-org/react";
+import InputPrenom from '@/components/ui/request/page';
 
 // function TextFieldError({ error }: { error?: string }) {
 //   return error ? (
@@ -85,12 +86,7 @@ const Quiz = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl mx-auto mt-8 bg-gray-800 text-gray-200 p-6 rounded-lg">
-      <div>
-        <h2 className="text-xl font-bold text-primary">NOM PRENOM *</h2>
-        <p className='text-sm'>* sans quoi vos réponses ne seront pas prise en compte.</p>
-        <Input type="text" {...register("nom", { required: true, maxLength: 60 })} className="mt-1 w-full" />
-        {errors.prenom && errors.prenom.message?.toString()}
-      </div>
+      <InputPrenom register={register} />
       <div className="mt-8">
         <h2 className="text-lg font-semibold">Question 1 : Nom du plus grand joueur de basket de l'histoire</h2>
         <p className='text-sm'>Aucun jugement, tu peux citer n'importe lequel (même Westbrook).</p>
