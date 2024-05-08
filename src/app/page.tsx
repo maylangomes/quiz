@@ -29,21 +29,23 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button as ButtonDialogue } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import {Slider} from "@nextui-org/react";
 
-function TextFieldError({ error }: { error?: string }) {
-  return error ? (
-    <div
-      style={{
-        color: "red",
-        position: "absolute",
-        top: "-16px",
-        fontSize: "0.8em"
-      }}
-    >
-      {error}
-    </div>
-  ) : null;
-}
+// function TextFieldError({ error }: { error?: string }) {
+//   return error ? (
+//     <div
+//       style={{
+//         color: "red",
+//         position: "absolute",
+//         top: "-16px",
+//         fontSize: "0.8em"
+//       }}
+//     >
+//       {error}
+//     </div>
+//   ) : null;
+// }
 
 
 const Quiz = () => {
@@ -52,7 +54,8 @@ const Quiz = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   const [inputValid, setInputValid] = useState(false);
   const [showQuestion6, setShowQuestion6] = useState(false);
-  const [position, setPosition] = React.useState("bottom")
+  const [position, setPosition] = React.useState("bottom");
+  const [sliderValue, setSliderValue] = useState<number | number[] | string >(40);
 
   useEffect(() => {
     console.log(inputValid);
@@ -70,7 +73,8 @@ const Quiz = () => {
         question5: data.question5,
         question6: data.question6,
         question6bis: data.question6bis,
-        question7: data.question7
+        question7: data.question7,
+        question8: sliderValue
       };
       await supabase.from('answer').insert(answers).select();
       console.log('Form submitted successfully!');
@@ -241,6 +245,19 @@ const Quiz = () => {
             )}
           />
         </Dropdown> */}
+      </div>
+      <div>
+        <h2 className="text-lg font-semibold">Question 8 : Selon toi, quel pourcentage de chance a l'équipe de France d'être championne du monde en 2027 ?</h2>
+        <p className='text-sm'>Avis perso : 92%.</p>
+        <Slider 
+          name="question8"
+          label="Choisis ton pourcentage"
+          step={1} 
+          maxValue={100} 
+          minValue={0} 
+          defaultValue={40}
+          onChange={(value) => setSliderValue(value)}
+        />
       </div>
       <div className="flex justify-end mt-8">
         <AlertDialog>
