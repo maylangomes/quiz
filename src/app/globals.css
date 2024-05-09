@@ -73,5 +73,13 @@
     body {
       /* @apply bg-background text-foreground; */
       background-color: #e5e7eb;
+      font-family: "quicksand";
+    }
+
+    @layer base {
+      @font-face {
+        font-family: "quicksand";
+        src: url("../../public/Quicksand-Regular.otf");
+      }
     }
   }
