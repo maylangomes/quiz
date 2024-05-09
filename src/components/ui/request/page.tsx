@@ -1,14 +1,27 @@
-import React from 'react';
-import { Input } from "@/components/ui/input";
+import { supabase } from '../../../../utils/supabase';
 
-const InputPrenom: React.FC<any> = ({ register }) => {
-  return (
-    <div>
-    <h2 className="text-xl font-bold text-primary">NOM PRENOM *</h2>
-    <p className='text-sm'>* sans quoi vos réponses ne seront pas prise en compte.</p>
-    <Input type="text" {...register("nom", { required: true, maxLength: 60 })} className="mt-1 w-full" />
-  </div>
-  );
+const Request = async (data: any, sliderValue: number, setIsSubmit: (value: boolean) => void) => {
+  setIsSubmit(true);
+  try {
+    const answers = {
+      nom: data.nom,
+      question1: data.question1,
+      question2: data.question2,
+      question3: data.Question3,
+      question4: data.question4,
+      question5: data.question5,
+      question6: data.question6,
+      question6bis: data.question6bis,
+      question7: data.question7,
+      question8: sliderValue
+    };
+    await supabase.from('answer').insert(answers).select();
+    console.log('Request send !');
+  } catch (error: any) {
+    console.error('error request :', error.message);
+  } finally {
+    setIsSubmit(false);
+  }
 };
 
-export default InputPrenom;
+export default Request;

@@ -31,22 +31,9 @@ import {
 import { Button as ButtonDialogue } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {Slider} from "@nextui-org/react";
-import InputPrenom from '@/components/ui/request/page';
-
-// function TextFieldError({ error }: { error?: string }) {
-//   return error ? (
-//     <div
-//       style={{
-//         color: "red",
-//         position: "absolute",
-//         top: "-16px",
-//         fontSize: "0.8em"
-//       }}
-//     >
-//       {error}
-//     </div>
-//   ) : null;
-// }
+import InputPrenom from '@/components/ui/question1/page';
+import Link from "next/link";
+import Request from "@/components/ui/request/page";
 
 
 const Quiz = () => {
@@ -54,30 +41,18 @@ const Quiz = () => {
   console.log(errors);
   const [isSubmit, setIsSubmit] = useState(false);
   const [showQuestion6, setShowQuestion6] = useState(false);
-  const [sliderValue, setSliderValue] = useState<number | number[] | string >(40);
+  const [sliderValue, setSliderValue] = useState<any>(40);
+  const [userInput, setUserInput] = useState('');
 
-  const onSubmit = async (data: any) => {
-    setIsSubmit(true);
-    try {
-      const answers = {
-        nom: data.nom,
-        question1: data.question1,
-        question2: data.question2,
-        question3: data.Question3,
-        question4: data.question4,
-        question5: data.question5,
-        question6: data.question6,
-        question6bis: data.question6bis,
-        question7: data.question7,
-        question8: sliderValue
-      };
-      await supabase.from('answer').insert(answers).select();
-      console.log('Form submitted successfully!');
-    } catch (error: any) {
-      console.error('Failed to submit form:', error.message);
-    } finally {
-      setIsSubmit(false);
+  useEffect(() => {
+    const storedInput = localStorage.getItem('userInput');
+    if (storedInput) {
+      setUserInput(storedInput);
     }
+  }, []);
+
+  const onSubmit = (data: any) => {
+    Request(data, sliderValue, setIsSubmit);
   };
 
   const handleQuestionAChange = (e: any) => {
@@ -86,8 +61,10 @@ const Quiz = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl mx-auto mt-8 bg-gray-800 text-gray-200 p-6 rounded-lg">
-      <InputPrenom register={register} />
+      <InputPrenom register={register} errors={errors} />
       <div className="mt-8">
+        <Link href="/editQuestion">Page éditeur</Link>
+        <h2>User Input: {userInput}</h2>
         <h2 className="text-lg font-semibold">Question 1 : Nom du plus grand joueur de basket de l'histoire</h2>
         <p className='text-sm'>Aucun jugement, tu peux citer n'importe lequel (même Westbrook).</p>
         <Input type="text" {...register("question1")} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg" />
@@ -146,7 +123,7 @@ const Quiz = () => {
         /> */}
       </div>
       <div className="mt-8">
-        <h2 className="text-lg font-semibold">Question 4 : Quels sont les 3 éléments les plus importants pour le shoot au basket ?</h2>
+        <h2 className="text-lg font-semibold">Question 4 : Quels sont les éléments les plus importants pour le shoot au basket ?</h2>
         <p className='text-sm'>Oui c'est une question très relative, mais je suis coach so I don't care.</p>
         <Controller
           control={control}
