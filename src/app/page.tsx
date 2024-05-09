@@ -1,36 +1,10 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import Select from 'react-select';
-//import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-// import { Label } from "@/components/ui/label";
-// import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Button as ButtonDialogue } from "@/components/ui/button";
-import {Slider} from "@nextui-org/react";
+import { useForm } from 'react-hook-form';
 import InputNom from '@/components/ui/questions/nom/page';
 import Link from "next/link";
+import { Input } from "@/components/ui/input";
 import Request from "@/components/ui/request/page";
 import InputQuestion1 from '@/components/ui/questions/question1/page';
 import InputQuestion2 from '@/components/ui/questions/question2/page';
@@ -40,14 +14,20 @@ import InputQuestion5 from '@/components/ui/questions/question5/page';
 import InputQuestion6 from '@/components/ui/questions/question6/page';
 import InputQuestion7 from '@/components/ui/questions/question7/page';
 import InputQuestion8 from '@/components/ui/questions/question8/page';
+import SendButton from '@/components/ui/questions/bouton-envoyer/page';
+import InputUserQuestion from '@/components/ui/user-questions/user-question/page';
 
 
 const Quiz = () => {
   const { register, handleSubmit, control, formState: { errors } } = useForm();
   console.log(errors);
   const [isSubmit, setIsSubmit] = useState(false);
-  const [showQuestion6, setShowQuestion6] = useState(false);
   const [sliderValue, setSliderValue] = useState<any>(40);
+
+  const onSubmit = (data: any) => {
+    Request(data, sliderValue, setIsSubmit);
+  };
+  
 
   // useState pour le mode éditeur
   const [userTitleQuestion1, setUserTitleQuestion1] = useState('');
@@ -135,69 +115,65 @@ const Quiz = () => {
     }
   }, []);
 
-  const onSubmit = (data: any) => {
-    Request(data, sliderValue, setIsSubmit);
-  };
-
-  const handleQuestionAChange = (e: any) => {
-    setShowQuestion6(e.target.value === 'Oui');
-  };
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl mx-auto mt-8 bg-gray-800 text-gray-200 p-6 rounded-lg">
-      <InputNom register={register} errors={errors} />
-      <Link href="/edit-question">Page éditeur</Link>
-      <div className={userTitleQuestion1 !== '' ? "" : "hidden"}>
-        <h2>User Title: {userTitleQuestion1}</h2>
-        <p>User Description : {userDescriptionQuestion1}</p>
-      </div>
-      <div className={userTitleQuestion1 !== '' ? "hidden" : ""}>
-        <InputQuestion1 register={register} errors={errors} />
-      </div>
-      <div className={userTitleQuestion2 !== '' ? "" : "hidden"}>
-        <h2>User Title: {userTitleQuestion2}</h2>
-        <p>User Description : {userDescriptionQuestion2}</p>
-      </div>
-      <div className={userTitleQuestion2 !== '' ? "hidden" : ""}>
-        <InputQuestion2 register={register} errors={errors} />
-      </div>
-      <div>
-        <InputQuestion3 register={register} errors={errors} />
-      </div>
-      <div>
-      <InputQuestion4 control={control} />
-      </div>
-      <div>
-        <InputQuestion5 register={register} errors={errors} />
-      </div>
-      <div>
-        <InputQuestion6 register={register} errors={errors} />
-      </div>
-      <div>
-        <InputQuestion7 control={control} />
-      </div>
-      <div>
-        <InputQuestion8 setSliderValue={setSliderValue} />
-      </div>
-      <div className="flex justify-end mt-8">
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <ButtonDialogue type="submit" variant="outline" className="bg-primary text-gray-800 px-4 py-2 rounded hover:bg-primary">Envoyer les réponses</ButtonDialogue>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Merci !</AlertDialogTitle>
-              <AlertDialogDescription>
-                Tes réponses ont bien été envoyées avec le nom indiqué. Tu peux répondre au questionnaire autant que tu le souhaites, seul ton dernier envoi sera pris en compte.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogAction>Ok</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </div>
-    </form>
+    <div>
+      <h1 className="text-4xl font-bold text-center mb-8 mt-4">Basket Quiz</h1>
+      <form onSubmit={handleSubmit(onSubmit)} className="max-w-2xl mx-auto mt-10 bg-gray-800 text-gray-200 p-8 rounded-xl">
+        <InputNom register={register} errors={errors} />
+        <div className={userTitleQuestion1 !== '' ? "" : "hidden"}>
+          <InputUserQuestion userTitle={userTitleQuestion1} userDescription={userDescriptionQuestion1} />
+        </div>
+        <div className={userTitleQuestion1 !== '' ? "hidden" : ""}>
+          <InputQuestion1 register={register} errors={errors} />
+        </div>
+        <div className={userTitleQuestion2 !== '' ? "" : "hidden"}>
+          <InputUserQuestion userTitle={userTitleQuestion2} userDescription={userDescriptionQuestion2} />
+        </div>
+        <div className={userTitleQuestion2 !== '' ? "hidden" : ""}>
+          <InputQuestion2 register={register} errors={errors} />
+        </div>
+        <div className={userTitleQuestion3 !== '' ? "" : "hidden"}>
+          <InputUserQuestion userTitle={userTitleQuestion3} userDescription={userDescriptionQuestion3} />
+        </div>
+        <div className={userTitleQuestion3 !== '' ? "hidden" : ""}>
+          <InputQuestion3 register={register} errors={errors} />
+        </div>
+        <div className={userTitleQuestion4 !== '' ? "" : "hidden"}>
+          <InputUserQuestion userTitle={userTitleQuestion4} userDescription={userDescriptionQuestion4} />
+        </div>
+        <div className={userTitleQuestion4 !== '' ? "hidden" : ""}>
+        <InputQuestion4 control={control} />
+        </div>
+        <div className={userTitleQuestion5 !== '' ? "" : "hidden"}>
+          <InputUserQuestion userTitle={userTitleQuestion5} userDescription={userDescriptionQuestion5} />
+        </div>
+        <div className={userTitleQuestion5 !== '' ? "hidden" : ""}>
+          <InputQuestion5 register={register} errors={errors} />
+        </div>
+        <div className={userTitleQuestion6 !== '' ? "" : "hidden"}>
+          <InputUserQuestion userTitle={userTitleQuestion6} userDescription={userDescriptionQuestion6} />
+        </div>
+        <div className={userTitleQuestion6 !== '' ? "hidden" : ""}>
+          <InputQuestion6 register={register} errors={errors} />
+        </div>
+        <div className={userTitleQuestion7 !== '' ? "" : "hidden"}>
+          <InputUserQuestion userTitle={userTitleQuestion7} userDescription={userDescriptionQuestion7} />
+        </div>
+        <div className={userTitleQuestion7 !== '' ? "hidden" : ""}>
+          <InputQuestion7 control={control} />
+        </div>
+        <div className={userTitleQuestion8 !== '' ? "" : "hidden"}>
+          <InputUserQuestion userTitle={userTitleQuestion8} userDescription={userDescriptionQuestion8} />
+        </div>
+        <div className={userTitleQuestion8 !== '' ? "hidden" : ""}>
+          <InputQuestion8 setSliderValue={setSliderValue} />
+        </div>
+        <div className="flex justify-between items-center mt-8">
+          <Link href="/edit-question" className='bg-primary text-gray-800 px-4 py-2 rounded hover:bg-primary"'><h1>Créer tes propres questions !</h1></Link>
+          <SendButton />
+        </div>
+      </form>
+    </div>
   );
 };
 

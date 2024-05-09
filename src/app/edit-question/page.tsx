@@ -142,72 +142,126 @@ const InputPage = () => {
 
   return (
     <div>
-      <form onSubmit={submitQuestion1}>
-        <input type="text" value={valueTitleQuestion1} onChange={changeTitleQuestion1} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitDescription1}>
-        <input type="text" value={valueDescriptionQuestion1} onChange={changeDescriptionQuestion1} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitQuestion2}>
-        <input type="text" value={valueTitleQuestion2} onChange={changeTitleQuestion2} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitDescription2}>
-        <input type="text" value={valueDescriptionQuestion2} onChange={changeDescriptionQuestion2} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitQuestion3}>
-        <input type="text" value={valueTitleQuestion3} onChange={changeTitleQuestion3} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitDescription3}>
-        <input type="text" value={valueDescriptionQuestion3} onChange={changeDescriptionQuestion3} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitQuestion4}>
-        <input type="text" value={valueTitleQuestion4} onChange={changeTitleQuestion4} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitDescription4}>
-        <input type="text" value={valueDescriptionQuestion4} onChange={changeDescriptionQuestion4} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitQuestion5}>
-        <input type="text" value={valueTitleQuestion5} onChange={changeTitleQuestion5} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitDescription5}>
-        <input type="text" value={valueDescriptionQuestion5} onChange={changeDescriptionQuestion5} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitQuestion6}>
-        <input type="text" value={valueTitleQuestion6} onChange={changeTitleQuestion6} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitDescription6}>
-        <input type="text" value={valueDescriptionQuestion6} onChange={changeDescriptionQuestion6} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitQuestion7}>
-        <input type="text" value={valueTitleQuestion7} onChange={changeTitleQuestion7} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitDescription7}>
-        <input type="text" value={valueDescriptionQuestion7} onChange={changeDescriptionQuestion7} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitQuestion8}>
-        <input type="text" value={valueTitleQuestion8} onChange={changeTitleQuestion8} />
-        <button type="submit">Submit</button>
-      </form>
-      <form onSubmit={submitDescription8}>
-        <input type="text" value={valueDescriptionQuestion8} onChange={changeDescriptionQuestion8} />
-        <button type="submit">Submit</button>
-      </form>
-        <Link href="/">Revenir au quiz</Link>
-        <ButtonDialogue onClick={clearLocalStorage}>Réinitialiser les questions</ButtonDialogue>
+      <div className="max-w-2xl mx-auto mt-10 mb-10 bg-gray-800 text-gray-200 p-6 rounded-lg">
+        <div className="flex justify-between items-center mb-10">
+          <Link href="/" className="bg-primary text-gray-800 px-4 py-2 rounded hover:bg-primary">Revenir au quiz</Link>
+          <ButtonDialogue onClick={clearLocalStorage} className="bg-primary text-gray-800 px-4 py-2 rounded hover:bg-primary">Réinitialiser les questions</ButtonDialogue>
+        </div>
+        <h1 className="text-3xl font-bold text-center mb-4 mt-4 underline">Page éditeur</h1>
+        <p className='text-sm text-center mb-8 italic'>Les descriptions s'ajoutent uniquement si tu as modifié la question</p>
+        <form onSubmit={submitQuestion1}>
+          <div className="mt-8">
+            <h2 className="text-lg font-semibold">Écris ta question 1 ici :</h2>
+            <input type="text" value={valueTitleQuestion1} onChange={changeTitleQuestion1} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg" />
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitDescription1}>
+          <div className='mt-2'>
+            <h2 className="text-lg font-semibold">Ajoute une description si tu le souhaites :</h2>
+            <input type="text" value={valueDescriptionQuestion1} onChange={changeDescriptionQuestion1} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg" />
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitQuestion2}>
+          <div className='mt-8'>
+            <h2 className="text-lg font-semibold">Écris ta question 2 ici :</h2>
+            <input type="text" value={valueTitleQuestion2} onChange={changeTitleQuestion2} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg"/>
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitDescription2}>
+          <div className='mt-2'>
+            <h2 className="text-lg font-semibold">Ajoute une description si tu le souhaites :</h2>
+            <input type="text" value={valueDescriptionQuestion2} onChange={changeDescriptionQuestion2} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg"/>
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitQuestion3}>
+          <div className='mt-8'>
+            <h2 className="text-lg font-semibold">Écris ta question 3 ici :</h2>
+            <input type="text" value={valueTitleQuestion3} onChange={changeTitleQuestion3} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg"/>
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitDescription3}>
+          <div className='mt-2'>
+            <h2 className="text-lg font-semibold">Ajoute une description si tu le souhaites :</h2>
+            <input type="text" value={valueDescriptionQuestion3} onChange={changeDescriptionQuestion3} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg"/>
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitQuestion4}>
+          <div className='mt-8'>
+            <h2 className="text-lg font-semibold">Écris ta question 4 ici :</h2>
+            <input type="text" value={valueTitleQuestion4} onChange={changeTitleQuestion4} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg"/>
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitDescription4}>
+          <div className='mt-2'>
+            <h2 className="text-lg font-semibold">Ajoute une description si tu le souhaites :</h2>
+            <input type="text" value={valueDescriptionQuestion4} onChange={changeDescriptionQuestion4} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg"/>
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitQuestion5}>
+          <div className='mt-8'>
+            <h2 className="text-lg font-semibold">Écris ta question 5 ici :</h2>
+            <input type="text" value={valueTitleQuestion5} onChange={changeTitleQuestion5} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg"/>
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitDescription5}>
+          <div className='mt-2'>
+            <h2 className="text-lg font-semibold">Ajoute une description si tu le souhaites :</h2>
+            <input type="text" value={valueDescriptionQuestion5} onChange={changeDescriptionQuestion5} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg"/>
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitQuestion6}>
+          <div className='mt-8'>
+            <h2 className="text-lg font-semibold">Écris ta question 6 ici :</h2>
+            <input type="text" value={valueTitleQuestion6} onChange={changeTitleQuestion6} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg"/>
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitDescription6}>
+          <div className='mt-2'>
+            <h2 className="text-lg font-semibold">Ajoute une description si tu le souhaites :</h2>
+            <input type="text" value={valueDescriptionQuestion6} onChange={changeDescriptionQuestion6} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg"/>
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitQuestion7}>
+          <div className='mt-8'>
+            <h2 className="text-lg font-semibold">Écris ta question 7 ici :</h2>
+            <input type="text" value={valueTitleQuestion7} onChange={changeTitleQuestion7} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg"/>
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitDescription7}>
+          <div className='mt-2'>
+            <h2 className="text-lg font-semibold">Ajoute une description si tu le souhaites :</h2>
+            <input type="text" value={valueDescriptionQuestion7} onChange={changeDescriptionQuestion7} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg"/>
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitQuestion8}>
+          <div className='mt-8'>
+            <h2 className="text-lg font-semibold">Écris ta question 8 ici :</h2>
+            <input type="text" value={valueTitleQuestion8} onChange={changeTitleQuestion8} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg"/>
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+        <form onSubmit={submitDescription8}>
+          <div className='mt-2'>
+            <h2 className="text-lg font-semibold">Ajoute une description si tu le souhaites :</h2>
+            <input type="text" value={valueDescriptionQuestion8} onChange={changeDescriptionQuestion8} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg"/>
+            <button type="submit" className='font-bold'>Modifier</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
