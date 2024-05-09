@@ -148,6 +148,7 @@ const InputPage = () => {
           <ButtonDialogue onClick={clearLocalStorage} className="bg-primary text-gray-800 px-4 py-2 rounded hover:bg-primary">Réinitialiser les questions</ButtonDialogue>
         </div>
         <h1 className="text-3xl font-bold text-center mb-4 mt-4 underline">Page éditeur</h1>
+        <p className='text-sm text-center italic'>Appuie sur modifier et le changement s'effectue instantanément</p>
         <p className='text-sm text-center mb-8 italic'>Les descriptions s'ajoutent uniquement si tu as modifié la question</p>
         <form onSubmit={submitQuestion1}>
           <div className="mt-8">
