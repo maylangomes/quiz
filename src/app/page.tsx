@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import InputNom from '@/components/ui/questions/nom/page';
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
 import Request from "@/components/ui/request/page";
 import InputQuestion1 from '@/components/ui/questions/question1/page';
 import InputQuestion2 from '@/components/ui/questions/question2/page';
