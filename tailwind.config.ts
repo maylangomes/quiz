@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        quicksand: "quicksand",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -1,5 +1,6 @@
 'use client'
 
+import "./globals.css";
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import InputNom from '@/components/ui/questions/nom/page';
@@ -115,7 +116,7 @@ const Quiz = () => {
   }, []);
 
   return (
-    <div>
+    <div className="font-quicksand">
       <h1 className="text-4xl font-bold text-center mb-8 mt-4">Basket Quiz</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="max-w-2xl mx-auto mt-10 bg-gray-800 text-gray-200 p-8 rounded-xl">
         <InputNom register={register} errors={errors} />
