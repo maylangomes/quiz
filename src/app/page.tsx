@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { supabase } from '../../utils/supabase';
 import Select from 'react-select';
 //import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 import {
@@ -29,9 +28,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button as ButtonDialogue } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import {Slider} from "@nextui-org/react";
-import InputPrenom from '@/components/ui/question1/page';
+import InputPrenom from '@/components/ui/questions/question1/page';
 import Link from "next/link";
 import Request from "@/components/ui/request/page";
 
@@ -42,12 +40,90 @@ const Quiz = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   const [showQuestion6, setShowQuestion6] = useState(false);
   const [sliderValue, setSliderValue] = useState<any>(40);
-  const [userInput, setUserInput] = useState('');
 
+  // useState pour le mode éditeur
+  const [userTitleQuestion1, setUserTitleQuestion1] = useState('');
+  const [userDescriptionQuestion1, setUserDescriptionQuestion1] = useState('');
+  const [userTitleQuestion2, setUserTitleQuestion2] = useState('');
+  const [userDescriptionQuestion2, setUserDescriptionQuestion2] = useState('');
+  const [userTitleQuestion3, setUserTitleQuestion3] = useState('');
+  const [userDescriptionQuestion3, setUserDescriptionQuestion3] = useState('');
+  const [userTitleQuestion4, setUserTitleQuestion4] = useState('');
+  const [userDescriptionQuestion4, setUserDescriptionQuestion4] = useState('');
+  const [userTitleQuestion5, setUserTitleQuestion5] = useState('');
+  const [userDescriptionQuestion5, setUserDescriptionQuestion5] = useState('');
+  const [userTitleQuestion6, setUserTitleQuestion6] = useState('');
+  const [userDescriptionQuestion6, setUserDescriptionQuestion6] = useState('');
+  const [userTitleQuestion7, setUserTitleQuestion7] = useState('');
+  const [userDescriptionQuestion7, setUserDescriptionQuestion7] = useState('');
+  const [userTitleQuestion8, setUserTitleQuestion8] = useState('');
+  const [userDescriptionQuestion8, setUserDescriptionQuestion8] = useState('');
+
+  // (sorry j'ai pas réussi à faire de boucle)
   useEffect(() => {
-    const storedInput = localStorage.getItem('userInput');
-    if (storedInput) {
-      setUserInput(storedInput);
+    const titleQuestion1 = localStorage.getItem('userTitleQuestion1');
+    if (titleQuestion1) {
+      setUserTitleQuestion1(titleQuestion1);
+    }
+    const descriptionQuestion1 = localStorage.getItem('userDescriptionQuestion1');
+    if (descriptionQuestion1) {
+      setUserDescriptionQuestion1(descriptionQuestion1);
+    }
+    const titleQuestion2 = localStorage.getItem('userTitleQuestion2');
+    if (titleQuestion2) {
+      setUserTitleQuestion2(titleQuestion2);
+    }
+    const descriptionQuestion2 = localStorage.getItem('userDescriptionQuestion2');
+    if (descriptionQuestion2) {
+      setUserDescriptionQuestion2(descriptionQuestion2);
+    }
+    const titleQuestion3 = localStorage.getItem('userTitleQuestion3');
+    if (titleQuestion3) {
+      setUserTitleQuestion3(titleQuestion3);
+    }
+    const descriptionQuestion3 = localStorage.getItem('userDescriptionQuestion3');
+    if (descriptionQuestion3) {
+      setUserDescriptionQuestion3(descriptionQuestion3);
+    }
+    const titleQuestion4 = localStorage.getItem('userTitleQuestion4');
+    if (titleQuestion4) {
+      setUserTitleQuestion4(titleQuestion4);
+    }
+    const descriptionQuestion4 = localStorage.getItem('userDescriptionQuestion4');
+    if (descriptionQuestion4) {
+      setUserDescriptionQuestion4(descriptionQuestion4);
+    }
+    const titleQuestion5 = localStorage.getItem('userTitleQuestion5');
+    if (titleQuestion5) {
+      setUserTitleQuestion5(titleQuestion5);
+    }
+    const descriptionQuestion5 = localStorage.getItem('userDescriptionQuestion5');
+    if (descriptionQuestion5) {
+      setUserDescriptionQuestion5(descriptionQuestion5);
+    }
+    const titleQuestion6 = localStorage.getItem('userTitleQuestion6');
+    if (titleQuestion6) {
+      setUserTitleQuestion6(titleQuestion6);
+    }
+    const descriptionQuestion6 = localStorage.getItem('userDescriptionQuestion6');
+    if (descriptionQuestion6) {
+      setUserDescriptionQuestion6(descriptionQuestion6);
+    }
+    const titleQuestion7 = localStorage.getItem('userTitleQuestion7');
+    if (titleQuestion7) {
+      setUserTitleQuestion7(titleQuestion7);
+    }
+    const descriptionQuestion7 = localStorage.getItem('userDescriptionQuestion7');
+    if (descriptionQuestion7) {
+      setUserDescriptionQuestion7(descriptionQuestion7);
+    }
+    const titleQuestion8 = localStorage.getItem('userTitleQuestion8');
+    if (titleQuestion8) {
+      setUserTitleQuestion8(titleQuestion8);
+    }
+    const descriptionQuestion8 = localStorage.getItem('userDescriptionQuestion8');
+    if (descriptionQuestion8) {
+      setUserDescriptionQuestion8(descriptionQuestion8);
     }
   }, []);
 
@@ -62,19 +138,30 @@ const Quiz = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl mx-auto mt-8 bg-gray-800 text-gray-200 p-6 rounded-lg">
       <InputPrenom register={register} errors={errors} />
-      <div className="mt-8">
-        <Link href="/editQuestion">Page éditeur</Link>
-        <h2>User Input: {userInput}</h2>
-        <h2 className="text-lg font-semibold">Question 1 : Nom du plus grand joueur de basket de l'histoire</h2>
-        <p className='text-sm'>Aucun jugement, tu peux citer n'importe lequel (même Westbrook).</p>
-        <Input type="text" {...register("question1")} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg" />
-        {errors.question1 && errors.question1.message?.toString()}
+      <Link href="/edit-question">Page éditeur</Link>
+      <div className={userTitleQuestion1 !== '' ? "" : "hidden"}>
+        <h2>User Title: {userTitleQuestion1}</h2>
+        <p>User Description : {userDescriptionQuestion1}</p>
       </div>
-      <div className="mt-8">
-        <h2 className="text-lg font-semibold">Question 2 : Quelle est le nombre de secondes accordé pour franchir le milieu de terrain ?</h2>
-        <p className='text-sm'>C'est bien d'être tranquille dans la vie, sauf quand t'attaques au basket.</p>
-        <Input type="number" {...register("question2")} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg" />
-        {errors.question2 && errors.question2.message?.toString()}
+      <div className={userTitleQuestion1 !== '' ? "hidden" : ""}>
+        <div className="mt-8">
+          <h2 className="text-lg font-semibold">Question 1 : Nom du plus grand joueur de basket de l'histoire</h2>
+          <p className='text-sm'>Aucun jugement, tu peux citer n'importe lequel (même Westbrook).</p>
+          <Input type="text" {...register("question1")} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg" />
+          {errors.question1 && errors.question1.message?.toString()}
+        </div>
+      </div>
+      <div className={userTitleQuestion2 !== '' ? "" : "hidden"}>
+        <h2>User Title: {userTitleQuestion2}</h2>
+        <p>User Description : {userDescriptionQuestion2}</p>
+      </div>
+      <div  className={userTitleQuestion2 !== '' ? "hidden" : ""}>
+        <div className="mt-8">
+          <h2 className="text-lg font-semibold">Question 2 : Quelle est le nombre de secondes accordé pour franchir le milieu de terrain ?</h2>
+          <p className='text-sm'>C'est bien d'être tranquille dans la vie, sauf quand t'attaques au basket.</p>
+          <Input type="number" {...register("question2")} className="mt-1 w-full bg-gray-200 text-gray-800 px-3 py-2 rounded-lg" />
+          {errors.question2 && errors.question2.message?.toString()}
+        </div>
       </div>
       <div className="mt-8">
         <h2 className="text-lg font-semibold">Question 3 : Quelle est la hauteur du panier ?</h2>
