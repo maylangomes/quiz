@@ -23,7 +23,7 @@ const SendButton = () => {
                 <AlertDialogHeader>
                 <AlertDialogTitle>Merci !</AlertDialogTitle>
                 <AlertDialogDescription>
-                    Tes réponses ont bien été envoyées avec le nom indiqué. Si tu veux connaître ton score, envoie un mail à maylan.gomes@epitech.eu.
+                    Tes réponses ont bien été envoyées avec le nom indiqué. Pour connaître ton score, envoie un mail à maylan.gomes@epitech.eu !
                 </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
