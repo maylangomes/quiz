@@ -609,6 +609,9 @@ video {
   --tw-contain-paint:  ;
   --tw-contain-style:  ;
 }
+.invisible {
+  visibility: hidden;
+}
 .fixed {
   position: fixed;
 }
@@ -705,6 +708,10 @@ video {
 .aspect-square {
   aspect-ratio: 1 / 1;
 }
+.size-6 {
+  width: 1.5rem;
+  height: 1.5rem;
+}
 .h-10 {
   height: 2.5rem;
 }
@@ -799,6 +806,9 @@ video {
 }
 .cursor-default {
   cursor: default;
+}
+.cursor-pointer {
+  cursor: pointer;
 }
 .touch-none {
   touch-action: none;

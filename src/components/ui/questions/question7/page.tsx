@@ -13,7 +13,7 @@ import { Button as ButtonDialogue } from "@/components/ui/button";
 const InputQuestion7: React.FC<any> = ({ control }) => {
   return (
     <div className="mt-8">
-        <h2 className="text-lg font-semibold">Question 7 : Quelle affirmation est fausse* ?</h2>
+        <h2 className="text-lg font-semibold">Question 7 : Quelle affirmation est fausse* ? (10 points)</h2>
         <p className='text-sm mb-2'>* Tout est relatif.</p>
         <Controller
         control={control}

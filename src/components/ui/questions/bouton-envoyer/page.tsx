@@ -8,11 +8,16 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog";
+import React from "react";
 
 import { Button as ButtonDialogue } from "@/components/ui/button";
 
+interface SendButtonProps {
+    points: number;
+}
 
-const SendButton = () => {
+
+const SendButton: React.FC<SendButtonProps> = ({points}) => {
     return (
         <div className="flex justify-end">
             <AlertDialog>
@@ -23,7 +28,7 @@ const SendButton = () => {
                 <AlertDialogHeader>
                 <AlertDialogTitle>Merci !</AlertDialogTitle>
                 <AlertDialogDescription>
-                    Tes réponses ont bien été envoyées avec le nom indiqué. Pour connaître ton score, envoie un mail à maylan.gomes@epitech.eu !
+                    Tes réponses ont bien été envoyées avec le nom indiqué. Tu as obtenu {points} points !
                 </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>

@@ -6,7 +6,7 @@ import Select from 'react-select';
 const InputQuestion4: React.FC<any> = ({ control }) => {
   return (
     <div className="mt-8">
-    <h2 className="text-lg font-semibold">Question 4 : Quels sont les 3 éléments les plus importants pour le shoot au basket ?</h2>
+    <h2 className="text-lg font-semibold">Question 4 : Quels sont les 3 éléments les plus importants, dans l'ordre, pour avoir un shoot stable ? (30 points)</h2>
     <p className='text-sm'>Oui c'est une question très relative, mais je suis coach so I don't care.</p>
     <Controller
       control={control}
@@ -22,7 +22,7 @@ const InputQuestion4: React.FC<any> = ({ control }) => {
             { value: 'Tete', label: 'La balle au-dessus de la tête au tir' },
             { value: 'Coude', label: 'Le coude en direction du panier' },
             { value: 'Appuis', label: 'Les appuis en direction du panier' },
-            { value: 'Transfert', label: 'Transfert de force des jambes' }
+            { value: 'Doigts', label: 'Doigts vers le panier au lâché du ballon' }
           ]}
           className="mt-1 w-full text-black"
         />

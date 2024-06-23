@@ -23,8 +23,26 @@ const Quiz = () => {
   console.log(errors);
   const [isSubmit, setIsSubmit] = useState(false);
   const [sliderValue, setSliderValue] = useState<any>(40);
+  const [points, setPoints] = useState<any>(0)
 
   const onSubmit = (data: any) => {
+    let newPoints = 0;
+    if (data.question1.toLowerCase() === "curry" || data.question1.toLowerCase() === "stephen curry") {
+      newPoints += 10;
+    }
+    if (data.question2 === "8") {
+      newPoints += 10;
+    }
+    if (data.question3 === "3m05") {
+      console.log("QUESTION 4 : ");
+      console.log(data.question4);
+      newPoints += 10;
+    }
+    if (data.question4[0].value === "Courbe" && data.question4[1].value === "Doigts" && data.question4[2].value === "Coude"){
+      newPoints += 30;
+    }
+    setPoints(newPoints);
+
     Request(data, sliderValue, setIsSubmit);
   };
   
@@ -148,7 +166,7 @@ const Quiz = () => {
           <InputUserQuestion userTitle={userTitleQuestion5} userDescription={userDescriptionQuestion5} />
         </div>
         <div className={userTitleQuestion5 !== '' ? "hidden" : ""}>
-          <InputQuestion5 register={register} errors={errors} />
+          <InputQuestion5 />
         </div>
         <div className={userTitleQuestion6 !== '' ? "" : "hidden"}>
           <InputUserQuestion userTitle={userTitleQuestion6} userDescription={userDescriptionQuestion6} />
@@ -170,7 +188,7 @@ const Quiz = () => {
         </div>
         <div className="flex justify-between items-center mt-8">
           <Link href="/edit-question" className='bg-primary text-gray-800 px-4 py-2 rounded hover:bg-primary"'><h1>Crée tes propres questions !</h1></Link>
-          <SendButton />
+          <SendButton points={points} />
         </div>
       </form>
     </div>
