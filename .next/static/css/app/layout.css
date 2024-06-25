@@ -609,9 +609,6 @@ video {
   --tw-contain-paint:  ;
   --tw-contain-style:  ;
 }
-.invisible {
-  visibility: hidden;
-}
 .fixed {
   position: fixed;
 }

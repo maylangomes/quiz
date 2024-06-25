@@ -19,11 +19,16 @@ import InputUserQuestion from '@/components/ui/user-questions/user-question/page
 
 
 const Quiz = () => {
-  const { register, handleSubmit, control, formState: { errors } } = useForm();
-  console.log(errors);
+  const { register, handleSubmit, control, formState: { errors }, setValue } = useForm();
   const [isSubmit, setIsSubmit] = useState(false);
   const [sliderValue, setSliderValue] = useState<any>(40);
-  const [points, setPoints] = useState<any>(0)
+  const [points, setPoints] = useState<any>(0);
+  const [rating, setRating] = useState(0);
+
+  useEffect(() => {
+    setValue("question5", rating); // Update form value when rating changes
+  }, [rating, setValue]);
+
 
   const onSubmit = (data: any) => {
     let newPoints = 0;
@@ -34,13 +39,25 @@ const Quiz = () => {
       newPoints += 10;
     }
     if (data.question3 === "3m05") {
-      console.log("QUESTION 4 : ");
-      console.log(data.question4);
       newPoints += 10;
     }
-    if (data.question4[0].value === "Courbe" && data.question4[1].value === "Doigts" && data.question4[2].value === "Coude"){
-      newPoints += 30;
+    if (typeof data.question4 !== 'undefined') {
+      if (
+        data.question4[0].value === "Courbe" &&
+        data.question4[1].value === "Doigts" &&
+        data.question4[2].value === "Coude"
+      ) {
+        newPoints += 30;
+      }
     }
+    if (typeof data.question5 !== 'undefined') {
+      if (data.question5 === 5) {
+        console.log("QUESTION 6");
+        console.log(data.question6);
+        newPoints += 10;
+      }
+    }
+    
     setPoints(newPoints);
 
     Request(data, sliderValue, setIsSubmit);
@@ -65,7 +82,6 @@ const Quiz = () => {
   const [userTitleQuestion8, setUserTitleQuestion8] = useState('');
   const [userDescriptionQuestion8, setUserDescriptionQuestion8] = useState('');
 
-  // (sorry j'ai pas réussi à faire de boucle)
   useEffect(() => {
     const titleQuestion1 = localStorage.getItem('userTitleQuestion1');
     if (titleQuestion1) {
@@ -166,19 +182,19 @@ const Quiz = () => {
           <InputUserQuestion userTitle={userTitleQuestion5} userDescription={userDescriptionQuestion5} />
         </div>
         <div className={userTitleQuestion5 !== '' ? "hidden" : ""}>
-          <InputQuestion5 />
+          <InputQuestion5 onRatingChange={setRating} />
         </div>
         <div className={userTitleQuestion6 !== '' ? "" : "hidden"}>
           <InputUserQuestion userTitle={userTitleQuestion6} userDescription={userDescriptionQuestion6} />
         </div>
         <div className={userTitleQuestion6 !== '' ? "hidden" : ""}>
-          <InputQuestion6 register={register} errors={errors} />
+          <InputQuestion6 control={control} />
         </div>
         <div className={userTitleQuestion7 !== '' ? "" : "hidden"}>
           <InputUserQuestion userTitle={userTitleQuestion7} userDescription={userDescriptionQuestion7} />
         </div>
         <div className={userTitleQuestion7 !== '' ? "hidden" : ""}>
-          <InputQuestion7 control={control} />
+          <InputQuestion7 register={register} errors={errors} />
         </div>
         <div className={userTitleQuestion8 !== '' ? "" : "hidden"}>
           <InputUserQuestion userTitle={userTitleQuestion8} userDescription={userDescriptionQuestion8} />

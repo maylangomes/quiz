@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
 
-const InputQuestion5 = () => {
-  const [rating, setRating] = useState<number>(0);
+interface StarIconProps {
+  filled: boolean;
+}
+
+interface InputQuestion5Props {
+  onRatingChange: (rating: number) => void;
+}
+
+const InputQuestion5: React.FC<InputQuestion5Props> = ({ onRatingChange }) => {
+  const [rating, setRating] = useState(0);
 
   const handleClick = (value: number) => {
     setRating(value);
+    onRatingChange(value); // Notify parent about the rating change
   };
 
-  const StarIcon: React.FC<any> = ({ filled }) => (
+  const StarIcon: React.FC<StarIconProps> = ({ filled }) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill={filled ? "currentColor" : "none"}
@@ -26,7 +35,7 @@ const InputQuestion5 = () => {
 
   return (
     <div className="mt-8">
-    <h2 className="text-lg font-semibold">Question 5 : Combien de fois les USA ont été champions du monde ? (10 points)</h2>
+      <h2 className="text-lg font-semibold">Question 5 : Combien de fois les USA ont été champions du monde ? (10 points)</h2>
       <div className="star-rating flex">
         {[...Array(10)].map((_, index) => {
           const starValue = index + 1;
