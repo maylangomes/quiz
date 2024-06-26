@@ -2,7 +2,7 @@ import React from 'react';
 
 const InputQuestion3: React.FC<any> = ({ register, errors }) => {
   return (
-    <div className="mt-8">
+    <div className="mt-12">
         <h2 className="text-lg font-semibold">Question 3 : Quelle est la hauteur du panier ? (10 points)</h2>
         <p className='text-sm'>Astuce : la taille moyenne d'une pomme est de 12,5cm.</p>
         <div className="mt-3">

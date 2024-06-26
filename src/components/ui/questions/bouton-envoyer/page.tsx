@@ -26,9 +26,9 @@ const SendButton: React.FC<SendButtonProps> = ({points}) => {
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                <AlertDialogTitle>Merci !</AlertDialogTitle>
+                <AlertDialogTitle>Merci d'avoir participé !</AlertDialogTitle>
                 <AlertDialogDescription>
-                    Tes réponses ont bien été envoyées avec le nom indiqué. Tu as obtenu {points} points/100 !
+                    <br />Score : {points}/100 <br /> <br /> Tu peux envoyer un mail à maylan.gomes@epitech.eu si tu veux connaître ton classement ou les réponses !
                 </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>

@@ -20,6 +20,7 @@ const config = {
     extend: {
       fontFamily: {
         quicksand: "quicksand",
+        montserrat: "montserrat",
       },
       colors: {
         border: "hsl(var(--border))",

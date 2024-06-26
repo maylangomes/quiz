@@ -5,9 +5,10 @@ import Select from 'react-select';
 
 const InputQuestion4: React.FC<any> = ({ control }) => {
   return (
-    <div className="mt-8">
+    <div className="mt-12">
     <h2 className="text-lg font-semibold">Question 4 : Quels sont les 3 éléments les plus importants, dans l'ordre, pour avoir un shoot stable ? (30 points)</h2>
-    <p className='text-sm'>Quesion relative vous pensez ? Moi j'pense pas.</p>
+    <p className='text-sm'>Quesion relative ? Vous pensez ? Moi j'pense pas</p>
+    <br />
     <Controller
       control={control}
       name="question4"

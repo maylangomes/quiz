@@ -73,13 +73,16 @@
     body {
       /* @apply bg-background text-foreground; */
       background-color: #e5e7eb;
-      font-family: "quicksand";
     }
 
     @layer base {
       @font-face {
         font-family: "quicksand";
-        src: url("../../public/Quicksand-Regular.otf");
+        src: url("/Quicksand-Regular.otf");
+      }
+      @font-face {
+        font-family: "montserrat";
+        src: url("/Montserrat-VariableFont_wght.ttf");
       }
     }
   }

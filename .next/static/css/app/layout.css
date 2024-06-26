@@ -495,11 +495,14 @@ video {
     body {
       /* @apply bg-background text-foreground; */
       background-color: #e5e7eb;
-      font-family: "quicksand";
     }
       @font-face {
         font-family: "quicksand";
-        src: url(/_next/static/media/Quicksand-Regular.86fae114.otf);
+        src: url("/Quicksand-Regular.otf");
+      }
+      @font-face {
+        font-family: "montserrat";
+        src: url("/Montserrat-VariableFont_wght.ttf");
       }
 
 *, ::before, ::after {
@@ -686,6 +689,9 @@ video {
 }
 .mt-8 {
   margin-top: 2rem;
+}
+.mt-12 {
+  margin-top: 3rem;
 }
 .block {
   display: block;
@@ -977,8 +983,8 @@ video {
 .text-center {
   text-align: center;
 }
-.font-quicksand {
-  font-family: quicksand;
+.font-montserrat {
+  font-family: montserrat;
 }
 .text-3xl {
   font-size: 1.875rem;

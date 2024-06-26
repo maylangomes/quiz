@@ -11,9 +11,10 @@ import { Button as ButtonDialogue } from "@/components/ui/button";
 
 const InputQuestion6: React.FC<{ control: any, setValue: (name: string, value: any) => void }> = ({ control, setValue }) => {
   return (
-    <div className="mt-8">
+    <div className="mt-12">
       <h2 className="text-lg font-semibold">Question 6 : Quelle affirmation est fausse* ? (20 points)</h2>
       <p className='text-sm mb-2'>* Tout est relatif.</p>
+      <br />
       <Controller
         control={control}
         name="question6"
@@ -28,7 +29,7 @@ const InputQuestion6: React.FC<{ control: any, setValue: (name: string, value: a
                 value={field.value} 
                 onValueChange={(value) => {
                   field.onChange(value);
-                  setValue("question6", value); // Update the form value
+                  setValue("question6", value);
                 }}
               >
                 <DropdownMenuRadioItem value="Michael">Michael Jordan a quitté la NBA pour aller jouer au baseball</DropdownMenuRadioItem>
