@@ -10,7 +10,7 @@ const InputQuestion8: React.FC<any> = ({setSliderValue}) => {
         <br />
         <Slider
         name="question8"
-        label="Sélectionne ton pourcentage ci-dessous"
+        label="Sélectionne ton pourcentage"
         step={1} 
         maxValue={100} 
         minValue={0} 

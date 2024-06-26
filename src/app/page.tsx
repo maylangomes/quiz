@@ -218,7 +218,7 @@ const Quiz = () => {
           <InputQuestion8 setSliderValue={setSliderValue} />
         </div>
         <div className="flex justify-between items-center mt-8">
-          <Link href="/edit-question" className='bg-primary text-gray-800 px-4 py-2 rounded hover:bg-primary"'><h1>Crée tes propres questions !</h1></Link>
+          <Link href="/edit-question" className='bg-primary text-gray-800 px-4 py-2 rounded hover:bg-primary mr-1'><h1>Crée tes propres questions !</h1></Link>
           <SendButton points={points} />
         </div>
       </form>
