@@ -26,18 +26,16 @@ const Quiz = () => {
   const [rating, setRating] = useState(0);
 
   useEffect(() => {
-    setValue("question5", rating); // Update form value when rating changes
+    setValue("question5", rating);
   }, [rating, setValue]);
 
 
   const onSubmit = (data: any) => {
     let newPoints = 0;
+    
 
     if (data.question1.toLowerCase() === "curry" || data.question1.toLowerCase() === "stephen curry") {
       newPoints += 10;
-      console.log("question7");
-      
-      console.log(data.question7bis);
     }
 
     if (data.question2 === "8") {
@@ -66,16 +64,15 @@ const Quiz = () => {
 
     if (data.question6 !== "") {
       if (data.question6 === "Westbrook") {
-        newPoints += 20;     
+        newPoints += 20;
       }
     }
 
-    if (data.question7bis !== "") {
+    if (data.question7bis !== undefined) {
       if (data.question7bis.toLowerCase() === "kyrie irving") {
         newPoints += 10;
       }
     }
-    
     setPoints(newPoints);
 
     Request(data, sliderValue, setIsSubmit);
