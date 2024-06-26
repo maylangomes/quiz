@@ -36,6 +36,7 @@ const InputQuestion5: React.FC<InputQuestion5Props> = ({ onRatingChange }) => {
   return (
     <div className="mt-8">
       <h2 className="text-lg font-semibold">Question 5 : Combien de fois les USA ont été champions du monde ? (10 points)</h2>
+      <p className='text-sm'>Indice : C'est autant de fois que la Yougoslavie.</p>
       <div className="star-rating flex">
         {[...Array(10)].map((_, index) => {
           const starValue = index + 1;

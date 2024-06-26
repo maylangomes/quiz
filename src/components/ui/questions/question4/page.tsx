@@ -7,7 +7,7 @@ const InputQuestion4: React.FC<any> = ({ control }) => {
   return (
     <div className="mt-8">
     <h2 className="text-lg font-semibold">Question 4 : Quels sont les 3 éléments les plus importants, dans l'ordre, pour avoir un shoot stable ? (30 points)</h2>
-    <p className='text-sm'>Oui c'est une question très relative, mais je suis coach so I don't care.</p>
+    <p className='text-sm'>Quesion relative vous pensez ? Moi j'pense pas.</p>
     <Controller
       control={control}
       name="question4"

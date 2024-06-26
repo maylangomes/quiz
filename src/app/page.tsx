@@ -32,15 +32,22 @@ const Quiz = () => {
 
   const onSubmit = (data: any) => {
     let newPoints = 0;
+
     if (data.question1.toLowerCase() === "curry" || data.question1.toLowerCase() === "stephen curry") {
       newPoints += 10;
+      console.log("question7");
+      
+      console.log(data.question7bis);
     }
+
     if (data.question2 === "8") {
       newPoints += 10;
     }
+
     if (data.question3 === "3m05") {
       newPoints += 10;
     }
+
     if (typeof data.question4 !== 'undefined') {
       if (
         data.question4[0].value === "Courbe" &&
@@ -50,10 +57,21 @@ const Quiz = () => {
         newPoints += 30;
       }
     }
+
     if (typeof data.question5 !== 'undefined') {
       if (data.question5 === 5) {
-        console.log("QUESTION 6");
-        console.log(data.question6);
+        newPoints += 10;
+      }
+    }
+
+    if (data.question6 !== "") {
+      if (data.question6 === "Westbrook") {
+        newPoints += 20;     
+      }
+    }
+
+    if (data.question7bis !== "") {
+      if (data.question7bis.toLowerCase() === "kyrie irving") {
         newPoints += 10;
       }
     }
@@ -188,7 +206,7 @@ const Quiz = () => {
           <InputUserQuestion userTitle={userTitleQuestion6} userDescription={userDescriptionQuestion6} />
         </div>
         <div className={userTitleQuestion6 !== '' ? "hidden" : ""}>
-          <InputQuestion6 control={control} />
+          <InputQuestion6 control={control} setValue={setValue} />
         </div>
         <div className={userTitleQuestion7 !== '' ? "" : "hidden"}>
           <InputUserQuestion userTitle={userTitleQuestion7} userDescription={userDescriptionQuestion7} />

@@ -28,7 +28,7 @@ const SendButton: React.FC<SendButtonProps> = ({points}) => {
                 <AlertDialogHeader>
                 <AlertDialogTitle>Merci !</AlertDialogTitle>
                 <AlertDialogDescription>
-                    Tes réponses ont bien été envoyées avec le nom indiqué. Tu as obtenu {points} points !
+                    Tes réponses ont bien été envoyées avec le nom indiqué. Tu as obtenu {points} points/100 !
                 </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
