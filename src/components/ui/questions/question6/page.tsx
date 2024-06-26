@@ -31,9 +31,9 @@ const InputQuestion6: React.FC<{ control: any, setValue: (name: string, value: a
                   setValue("question6", value); // Update the form value
                 }}
               >
-                <DropdownMenuRadioItem value="Michael">Michael Jordan a quitté la NBA pour aller jouer au golf</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="Michael">Michael Jordan a quitté la NBA pour aller jouer au baseball</DropdownMenuRadioItem>
                 <DropdownMenuRadioItem value="Westbrook">Westbrook a mis plus de briques à 45° que de 3 points dans sa carrière</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="Shaq">Shaquille O'Neal subissait volontairement des fautes car il marquait autant de lancers-francs qu'un poussin</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="Shaq">Shaquille O'Neal subissait volontairement des fautes car il marquait autant de lancers-francs qu'un U9</DropdownMenuRadioItem>
                 <DropdownMenuRadioItem value="Kobe">Kobe Bryant a fait une passe en 1989</DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
