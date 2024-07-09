@@ -65,14 +65,15 @@ const Quiz = () => {
 
     if (typeof data.question4 !== 'undefined') {
       if (
-        data.question4[0].value === "Courbe" &&
-        data.question4[1].value === "Doigts" &&
-        data.question4[2].value === "Coude"
+        data.question4.length > 2 &&
+        data.question4[0]?.value === "Courbe" &&
+        data.question4[1]?.value === "Doigts" &&
+        data.question4[2]?.value === "Coude"
       ) {
         newPoints += 30;
         setFourIsCorrect(true);
       } else {
-        setFourIsCorrect(false)
+        setFourIsCorrect(false);
       }
     }
 
@@ -87,6 +88,7 @@ const Quiz = () => {
 
     if (data.question6 !== "") {
       if (data.question6 === "Westbrook") {
+        console.log(data.question4);
         newPoints += 20;
         setSixIsCorrect(true);
       } else {
