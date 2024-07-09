@@ -24,6 +24,14 @@ const Quiz = () => {
   const [sliderValue, setSliderValue] = useState<any>(40);
   const [points, setPoints] = useState<any>(0);
   const [rating, setRating] = useState(0);
+  const [oneIsCorrect, setOneIsCorrect] = useState(true);
+  const [twoIsCorrect, setTwoIsCorrect] = useState(true);
+  const [threeIsCorrect, setThreeIsCorrect] = useState(true);
+  const [fourIsCorrect, setFourIsCorrect] = useState(true);
+  const [fiveIsCorrect, setFiveIsCorrect] = useState(true);
+  const [sixIsCorrect, setSixIsCorrect] = useState(true);
+  const [sevenIsCorrect, setSevenIsCorrect] = useState(true);
+
 
   useEffect(() => {
     setValue("question5", rating);
@@ -36,14 +44,23 @@ const Quiz = () => {
 
     if (data.question1.toLowerCase() === "curry" || data.question1.toLowerCase() === "stephen curry") {
       newPoints += 10;
+      setOneIsCorrect(true);
+    } else {
+      setOneIsCorrect(false)
     }
 
     if (data.question2 === "8") {
       newPoints += 10;
+      setTwoIsCorrect(true);
+    } else {
+      setTwoIsCorrect(false);
     }
 
     if (data.question3 === "3m05") {
       newPoints += 10;
+      setThreeIsCorrect(true);
+    } else {
+      setThreeIsCorrect(false);
     }
 
     if (typeof data.question4 !== 'undefined') {
@@ -53,26 +70,39 @@ const Quiz = () => {
         data.question4[2].value === "Coude"
       ) {
         newPoints += 30;
+        setFourIsCorrect(true);
+      } else {
+        setFourIsCorrect(false)
       }
     }
 
     if (typeof data.question5 !== 'undefined') {
       if (data.question5 === 5) {
         newPoints += 10;
+        setFiveIsCorrect(true);
+      } else {
+        setFiveIsCorrect(false)
       }
     }
 
     if (data.question6 !== "") {
       if (data.question6 === "Westbrook") {
         newPoints += 20;
+        setSixIsCorrect(true);
+      } else {
+        setSixIsCorrect(false)
       }
     }
 
     if (data.question7bis !== undefined) {
-      if (data.question7bis.toLowerCase() === "kyrie irving") {
+      if (data.question7bis.toLowerCase() === "kyrie irving" || data.question7bis.toLowerCase() === "irving" || data.question7bis.toLowerCase() === "kyrie") {
         newPoints += 10;
+        setSevenIsCorrect(true);
+      } else {
+        setSevenIsCorrect(false)
       }
     }
+
     setPoints(newPoints);
 
     Request(data, sliderValue, setIsSubmit);
@@ -173,43 +203,43 @@ const Quiz = () => {
           <InputUserQuestion userTitle={userTitleQuestion1} userDescription={userDescriptionQuestion1} />
         </div>
         <div className={userTitleQuestion1 !== '' ? "hidden" : ""}>
-          <InputQuestion1 register={register} errors={errors} />
+          <InputQuestion1 register={register} errors={errors} isCorrect={oneIsCorrect} />
         </div>
         <div className={userTitleQuestion2 !== '' ? "" : "hidden"}>
           <InputUserQuestion userTitle={userTitleQuestion2} userDescription={userDescriptionQuestion2} />
         </div>
         <div className={userTitleQuestion2 !== '' ? "hidden" : ""}>
-          <InputQuestion2 register={register} errors={errors} />
+          <InputQuestion2 register={register} errors={errors} isCorrect={twoIsCorrect} />
         </div>
         <div className={userTitleQuestion3 !== '' ? "" : "hidden"}>
           <InputUserQuestion userTitle={userTitleQuestion3} userDescription={userDescriptionQuestion3} />
         </div>
         <div className={userTitleQuestion3 !== '' ? "hidden" : ""}>
-          <InputQuestion3 register={register} errors={errors} />
+          <InputQuestion3 register={register} errors={errors} isCorrect={threeIsCorrect} />
         </div>
         <div className={userTitleQuestion4 !== '' ? "" : "hidden"}>
           <InputUserQuestion userTitle={userTitleQuestion4} userDescription={userDescriptionQuestion4} />
         </div>
         <div className={userTitleQuestion4 !== '' ? "hidden" : ""}>
-        <InputQuestion4 control={control} />
+        <InputQuestion4 control={control} isCorrect={fourIsCorrect} />
         </div>
         <div className={userTitleQuestion5 !== '' ? "" : "hidden"}>
           <InputUserQuestion userTitle={userTitleQuestion5} userDescription={userDescriptionQuestion5} />
         </div>
         <div className={userTitleQuestion5 !== '' ? "hidden" : ""}>
-          <InputQuestion5 onRatingChange={setRating} />
+          <InputQuestion5 onRatingChange={setRating} isCorrect={fiveIsCorrect} />
         </div>
         <div className={userTitleQuestion6 !== '' ? "" : "hidden"}>
           <InputUserQuestion userTitle={userTitleQuestion6} userDescription={userDescriptionQuestion6} />
         </div>
         <div className={userTitleQuestion6 !== '' ? "hidden" : ""}>
-          <InputQuestion6 control={control} setValue={setValue} />
+          <InputQuestion6 control={control} setValue={setValue} isCorrect={sixIsCorrect} />
         </div>
         <div className={userTitleQuestion7 !== '' ? "" : "hidden"}>
           <InputUserQuestion userTitle={userTitleQuestion7} userDescription={userDescriptionQuestion7} />
         </div>
         <div className={userTitleQuestion7 !== '' ? "hidden" : ""}>
-          <InputQuestion7 register={register} errors={errors} />
+          <InputQuestion7 register={register} errors={errors} isCorrect={sevenIsCorrect} />
         </div>
         <div className={userTitleQuestion8 !== '' ? "" : "hidden"}>
           <InputUserQuestion userTitle={userTitleQuestion8} userDescription={userDescriptionQuestion8} />

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button as ButtonDialogue } from "@/components/ui/button";
 
-const InputQuestion6: React.FC<{ control: any, setValue: (name: string, value: any) => void }> = ({ control, setValue }) => {
+const InputQuestion6: React.FC<{ control: any, setValue: (name: string, value: any) => void, isCorrect: boolean }> = ({ control, setValue, isCorrect }) => {
   return (
     <div className="mt-12">
       <h2 className="text-lg font-semibold">Question 6 : Quelle affirmation est fausse* ? (20 points)</h2>
@@ -22,7 +22,7 @@ const InputQuestion6: React.FC<{ control: any, setValue: (name: string, value: a
         render={({ field }) => (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <ButtonDialogue variant="outline" className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg">Open</ButtonDialogue>
+              <ButtonDialogue variant="outline" className={`${isCorrect === false ? 'bg-red-500' : 'bg-gray-200'} text-gray-800 px-6 py-2 rounded-lg`}>Open</ButtonDialogue>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-96">
               <DropdownMenuRadioGroup 

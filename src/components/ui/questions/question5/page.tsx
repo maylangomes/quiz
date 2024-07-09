@@ -6,9 +6,10 @@ interface StarIconProps {
 
 interface InputQuestion5Props {
   onRatingChange: (rating: number) => void;
+  isCorrect: boolean;
 }
 
-const InputQuestion5: React.FC<InputQuestion5Props> = ({ onRatingChange }) => {
+const InputQuestion5: React.FC<InputQuestion5Props> = ({ onRatingChange, isCorrect }) => {
   const [rating, setRating] = useState(0);
 
   const handleClick = (value: number) => {
@@ -45,6 +46,7 @@ const InputQuestion5: React.FC<InputQuestion5Props> = ({ onRatingChange }) => {
             <div
               key={index}
               onClick={() => handleClick(starValue)}
+              className={`${isCorrect === false ? 'bg-red-500 rounded-2xl' : ''}`}
             >
               <StarIcon filled={starValue <= rating} />
             </div>

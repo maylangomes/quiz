@@ -78,11 +78,11 @@
     @layer base {
       @font-face {
         font-family: "quicksand";
-        src: url("/Quicksand-Regular.otf");
+        src: url("https://raw.githubusercontent.com/maylangomes/Assets/main/Quicksand-Regular.otf");
       }
       @font-face {
         font-family: "montserrat";
-        src: url("/Montserrat-VariableFont_wght.ttf");
+        src: url("https://raw.githubusercontent.com/maylangomes/Assets/main/Montserrat-VariableFont_wght.ttf");
       }
     }
   }

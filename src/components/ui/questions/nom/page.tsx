@@ -4,9 +4,9 @@ import { Input } from "@/components/ui/input";
 const InputNom: React.FC<any> = ({ register, errors }) => {
   return (
     <div>
-    <h2 className="text-xl font-bold text-primary">NOM PRENOM *</h2>
-    <p className='text-sm'>* sans quoi vos réponses ne seront pas prises en compte.</p>
-    <Input type="text" {...register("nom", { required: true, maxLength: 60 })} className="mt-1 w-full bg-gray-200 text-gray-800" />
+    <h2 className="text-xl font-bold text-primary">Prénom</h2>
+    <p className='text-sm'>Si vous souhaitez que le score soit enregistré.</p>
+    <Input type="text" {...register("nom")} className="mt-1 w-full bg-gray-200 text-gray-800" />
     {errors.nom && errors.nom.message?.toString()}
   </div>
   );
