@@ -7,7 +7,8 @@ const InputQuestion4: React.FC<any> = ({ control, isCorrect }) => {
   return (
     <div className="mt-12">
     <h2 className="text-lg font-semibold">Question 4 : Quels sont les 3 éléments les plus importants, dans l'ordre, pour avoir un shoot stable ? (30 points)</h2>
-    <p className='text-sm'>Quesion subjective ? Vous pensez ? <span className={`${isCorrect === false ? 'text-red-500' : 'text-white'}`}>Moi j'pense pas</span></p>
+    <p className='text-sm'>Question la plus difficile <br />
+    <span className={`${isCorrect === false ? 'text-red-500' : 'text-white hidden'}`}>Raté, dommage !</span></p>
     <br />
     <Controller
       control={control}
